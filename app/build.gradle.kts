@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.mpd.pmdm.dynamicfragments"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.mpd.pmdm.dynamicfragments"

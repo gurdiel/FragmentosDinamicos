@@ -22,12 +22,23 @@ class MainActivity : AppCompatActivity(), StarSignListener {
             val fragmentContainer = findViewById<FragmentContainerView>(R.id.fragment_container)
             //Construímos un nuevo ListFragment
             val listFragment = ListFragment()
-            //Le indicamos al controlar de fragmento supportFragmentManager que queremos añadir un nuevo fragmento al FragmentContainer referenciado
-            supportFragmentManager.beginTransaction().add(fragmentContainer.id, listFragment)
+            //Le indicamos al controlador de fragmentos supportFragmentManager
+            // que queremos añadir un nuevo fragmento ListFragment al contenedor
+            supportFragmentManager
+                .beginTransaction() //empezar una transacción
+                .add(fragmentContainer.id, listFragment)//qué transacción? añadir un fragmento al contenedor
+                .commit()//confirmar transacción
         }
     }
 
-    override fun onSelected(id: Int) {
-        //TODO
+    override fun onSelected(starSignId: Int) {
+        val fragmentContainer = findViewById<FragmentContainerView>(R.id.fragment_container)
+        //Instanciamos el detailFragment, pasándole el id al factory method
+        val detailFragment = DetailFragment.newInstance(starSignId)
+        supportFragmentManager
+            .beginTransaction()
+            .replace(fragmentContainer.id,detailFragment)//reemplazamos el fragmento actual del contenedor por un DetailFragment
+            .addToBackStack(null)//Con esto le decimos que el botón atrás no salga de la aplicación, sino que vuelva al fragmento anterior
+            .commit()
     }
 }
