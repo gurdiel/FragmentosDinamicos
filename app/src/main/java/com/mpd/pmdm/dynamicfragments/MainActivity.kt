@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity(), StarSignListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Si savedInstanceState no es null, significa que es una reconfiguración (ej: girar la pantalla),
+        //por lo que ya no es necesario volver a añadir el fragmento inicial
         if (savedInstanceState == null) {
             //Referenciamos el FragmentContainerView del activity_main
             val fragmentContainer = findViewById<FragmentContainerView>(R.id.fragment_container)
