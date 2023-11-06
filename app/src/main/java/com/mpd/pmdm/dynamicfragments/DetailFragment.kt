@@ -124,7 +124,7 @@ class DetailFragment : Fragment() {
 
         Es un static factory method: un método estático de la clase que nos genera
         instancias de la misma, como alternativa al uso de constructores. Es un constrcutor
-        más flexible, que hace lo que nos dé la gana. En este caso, recoger directamente el argumento
+        más flexible, que hace lo que nos dé la gana. En este caso, añadir directamente el argumento al Bundle
          */
         @JvmStatic
         fun newInstance(starSignId: Int) =
