@@ -8,16 +8,7 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-//Implentamos View.OnClickListener para que sea clickable el fragmento
-class ListFragment : Fragment(), View.OnClickListener {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class ListFragment : Fragment() {
 
     //Declaramos una variable para almacenar la implementación de la interfaz
     //StarSignListener declarada en MainActivity.kt
@@ -28,19 +19,15 @@ class ListFragment : Fragment(), View.OnClickListener {
     //Así aseguramos poder notificar a la Actividad cuando se haga click en un signo
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if(context is StarSignListener){
-            starSignListener = context
-        } else{
-          throw RuntimeException("Must implement StarSignListener")
-        }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        //Opcion 1
+//        if(context is StarSignListener){
+//            starSignListener = context
+//        } else{
+//          throw RuntimeException("Must implement StarSignListener")
+//        }
+        //Opcion 2.
+        if(activity is StarSignListener) starSignListener = activity as StarSignListener
+        else throw RuntimeException("Must implement StarSignListener")
     }
 
     override fun onCreateView(
@@ -70,45 +57,13 @@ class ListFragment : Fragment(), View.OnClickListener {
             view.findViewById(R.id.capricorn),
         )
 
-        //Asociamos a cada TextView de Signo el propio fragment como onClickListener (porque lo implementamos)
+        //A cada TextView signo le asociamos al evento onClick una llamada al Listener starSignListener
         starSigns.forEach{
-            it.setOnClickListener(this)
-        }
-
-    }
-
-
-    /**
-     * Pasa el id del signo clickado al starSignListener de la Actividad (Contexto) contenedora del fragment
-     * Los Listener son un mecanismo habitual para reaccionar a cambios de otras clases.
-     * Más info: https://hinchman-amanda.medium.com/the-listener-pattern-in-android-a2c532dd2938
-     */
-    override fun onClick(v: View?) {
-        v?.let{
-            //starSignListener es el atributo declarado como lateinit en esta clase
-            //que se inicializa en el onAttach con el contexto (la actividad contenedora del fragmento)
-            starSign -> starSignListener.onSelected(starSign.id)
-        }
-    }
-
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ListFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ListFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+            it.setOnClickListener{
+                starSignListener.onSelected(it.id)
             }
+        }
+
     }
 
 }

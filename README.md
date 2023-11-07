@@ -32,7 +32,7 @@ al fragmento._
     - Reemplazar el fragmento actual (ListFragment) por otro (DetailFragment), en la función onSelected de MainActivity, que hace de Listener para cualquier pulsación sobre un signo realizada en ListFragment.
     En este caso, vemos además como se usa la función _newInstance()_, un [static factory method](https://stackoverflow.com/questions/27101185/fragment-and-factory-method#:~:text=by%20static%20factory%20method%2C%20you,to%20know%20what%20keys%20are.) que nos genera Android para instanciar fragmentos
   
-      Los detalles sobre el uso de interfaces y listeners como elemento de comunicación entre fragmentos y actividades están explicados en [Dual Panel Layout](https://github.com/mcventur/DualPaneLayouts)     
+Los detalles sobre el uso de interfaces y listeners como elemento de comunicación entre fragmentos y actividades están explicados en [Dual Panel Layout](https://github.com/mcventur/DualPaneLayouts)     
 
 Más info sobre transacciones:https://developer.android.com/guide/fragments/transactions?hl=es-419#add-remove
 
