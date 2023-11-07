@@ -7,8 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import com.mpd.pmdm.dynamicfragments.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
+
+    var _binding: FragmentListBinding? = null
+    val binding get() = _binding!!
 
     //Declaramos una variable para almacenar la implementación de la interfaz
     //StarSignListener declarada en MainActivity.kt
@@ -35,7 +39,8 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_list, container, false)
+        _binding = FragmentListBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
 
@@ -43,18 +48,18 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val starSigns = listOf<View>(
-            view.findViewById(R.id.aquarius),
-            view.findViewById(R.id.pisces),
-            view.findViewById(R.id.aries),
-            view.findViewById(R.id.taurus),
-            view.findViewById(R.id.gemini),
-            view.findViewById(R.id.cancer),
-            view.findViewById(R.id.leo),
-            view.findViewById(R.id.virgo),
-            view.findViewById(R.id.libra),
-            view.findViewById(R.id.scorpio),
-            view.findViewById(R.id.sagittarius),
-            view.findViewById(R.id.capricorn),
+            binding.aquarius,
+            binding.pisces,
+            binding.aries,
+            binding.taurus,
+            binding.gemini,
+            binding.cancer,
+            binding.leo,
+            binding.virgo,
+            binding.libra,
+            binding.scorpio,
+            binding.sagittarius,
+            binding.capricorn,
         )
 
         //A cada TextView signo le asociamos al evento onClick una llamada al Listener starSignListener
@@ -66,4 +71,9 @@ class ListFragment : Fragment() {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        //Liberamos la memoria del atributo _binding
+        _binding = null
+    }
 }

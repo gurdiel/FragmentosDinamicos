@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.mpd.pmdm.dynamicfragments.databinding.FragmentDetailBinding
 
 /**
  * A simple [Fragment] subclass.
@@ -14,13 +14,8 @@ import androidx.fragment.app.Fragment
  * create an instance of this fragment.
  */
 class DetailFragment : Fragment() {
-    //Atributos para acceder a las Views
-    private val starSign: TextView?
-        get() = view?.findViewById(R.id.star_sign)
-    private val symbol: TextView?
-        get() = view?.findViewById(R.id.symbol)
-    private val dateRange: TextView?
-        get() = view?.findViewById(R.id.date_range)
+    var _binding: FragmentDetailBinding? = null
+    val binding get() = _binding!!
 
 
     override fun onCreateView(
@@ -28,7 +23,8 @@ class DetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detail, container, false)
+        _binding = FragmentDetailBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     /*
@@ -45,74 +41,90 @@ class DetailFragment : Fragment() {
     /**
      * Cumplimenta la IU con los datos del signo
      */
-    fun setStarSignData(starSignId: Int){
-        when(starSignId){
+    fun setStarSignData(starSignId: Int) {
+        when (starSignId) {
             R.id.aquarius -> {
-                starSign?.text = getString(R.string.aquarius)
-                symbol?.text = getString(R.string.symbol,"Water Carrier")
-                dateRange?.text = getString(R.string.date_range,
-                    "January 20 - February 18")
+                binding.starSign.text = getString(R.string.aquarius)
+                binding.symbol.text = getString(R.string.symbol, "Water Carrier")
+                binding.dateRange.text = getString(
+                    R.string.date_range,
+                    "January 20 - February 18"
+                )
             }
+
             R.id.pisces -> {
-                starSign?.text = getString(R.string.pisces)
-                symbol?.text = getString(R.string.symbol, "Fish")
-                dateRange?.text = getString(R.string.date_range, "February 19 - March 20")
+                binding.starSign.text = getString(R.string.pisces)
+                binding.symbol.text = getString(R.string.symbol, "Fish")
+                binding.dateRange.text = getString(R.string.date_range, "February 19 - March 20")
             }
+
             R.id.aries -> {
-                starSign?.text = getString(R.string.aries)
-                symbol?.text = getString(R.string.symbol, "Ram")
-                dateRange?.text = getString(R.string.date_range, "March 21 - April 19")
+                binding.starSign.text = getString(R.string.aries)
+                binding.symbol.text = getString(R.string.symbol, "Ram")
+                binding.dateRange.text = getString(R.string.date_range, "March 21 - April 19")
             }
+
             R.id.taurus -> {
-                starSign?.text = getString(R.string.taurus)
-                symbol?.text = getString(R.string.symbol, "Bull")
-                dateRange?.text = getString(R.string.date_range, "April 20 - May 20")
+                binding.starSign.text = getString(R.string.taurus)
+                binding.symbol.text = getString(R.string.symbol, "Bull")
+                binding.dateRange.text = getString(R.string.date_range, "April 20 - May 20")
             }
+
             R.id.gemini -> {
-                starSign?.text = getString(R.string.gemini)
-                symbol?.text = getString(R.string.symbol, "Twins")
-                dateRange?.text = getString(R.string.date_range, "May 21 - June 20")
+                binding.starSign.text = getString(R.string.gemini)
+                binding.symbol.text = getString(R.string.symbol, "Twins")
+                binding.dateRange.text = getString(R.string.date_range, "May 21 - June 20")
             }
+
             R.id.cancer -> {
-                starSign?.text = getString(R.string.cancer)
-                symbol?.text = getString(R.string.symbol, "Crab")
-                dateRange?.text = getString(R.string.date_range, "June 21 - July 22")
+                binding.starSign.text = getString(R.string.cancer)
+                binding.symbol.text = getString(R.string.symbol, "Crab")
+                binding.dateRange.text = getString(R.string.date_range, "June 21 - July 22")
             }
+
             R.id.leo -> {
-                starSign?.text = getString(R.string.leo)
-                symbol?.text = getString(R.string.symbol, "Lion")
-                dateRange?.text = getString(R.string.date_range, "July 23 - August 22")
+                binding.starSign.text = getString(R.string.leo)
+                binding.symbol.text = getString(R.string.symbol, "Lion")
+                binding.dateRange.text = getString(R.string.date_range, "July 23 - August 22")
             }
+
             R.id.virgo -> {
-                starSign?.text = getString(R.string.virgo)
-                symbol?.text = getString(R.string.symbol, "Virgin")
-                dateRange?.text = getString(R.string.date_range, "August 23 - September 22")
+                binding.starSign.text = getString(R.string.virgo)
+                binding.symbol.text = getString(R.string.symbol, "Virgin")
+                binding.dateRange.text = getString(R.string.date_range, "August 23 - September 22")
             }
+
             R.id.libra -> {
-                starSign?.text = getString(R.string.libra)
-                symbol?.text = getString(R.string.symbol, "Scales")
-                dateRange?.text = getString(R.string.date_range, "September 23 - October 22")
+                binding.starSign.text = getString(R.string.libra)
+                binding.symbol.text = getString(R.string.symbol, "Scales")
+                binding.dateRange.text = getString(R.string.date_range, "September 23 - October 22")
             }
+
             R.id.scorpio -> {
-                starSign?.text = getString(R.string.scorpio)
-                symbol?.text = getString(R.string.symbol, "Scorpion")
-                dateRange?.text = getString(R.string.date_range, "October 23 - November 21")
+                binding.starSign.text = getString(R.string.scorpio)
+                binding.symbol.text = getString(R.string.symbol, "Scorpion")
+                binding.dateRange.text = getString(R.string.date_range, "October 23 - November 21")
             }
+
             R.id.sagittarius -> {
-                starSign?.text = getString(R.string.sagittarius)
-                symbol?.text = getString(R.string.symbol, "Archer")
-                dateRange?.text = getString(R.string.date_range, "November 22 - December 21")
+                binding.starSign.text = getString(R.string.sagittarius)
+                binding.symbol.text = getString(R.string.symbol, "Archer")
+                binding.dateRange.text = getString(R.string.date_range, "November 22 - December 21")
             }
+
             R.id.capricorn -> {
-                starSign?.text = getString(R.string.capricorn)
-                symbol?.text = getString(R.string.symbol, "Mountain Goat")
-                dateRange?.text = getString(R.string.date_range, "December 22 - January 19")
+                binding.starSign.text = getString(R.string.capricorn)
+                binding.symbol.text = getString(R.string.symbol, "Mountain Goat")
+                binding.dateRange.text = getString(R.string.date_range, "December 22 - January 19")
             }
+
             else -> {
-                Toast.makeText(context, getString(R.string.unknown_star_sign), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.unknown_star_sign), Toast.LENGTH_LONG)
+                    .show()
             }
         }
     }
+
     companion object {
         private const val STAR_SIGN_ID = "STAR_SIGN_ID"
 
