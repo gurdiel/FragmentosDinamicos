@@ -18,7 +18,7 @@ Para cambiar, añadir o quitar un fragmento en un FragmentContainerView, usaremo
 
 En esta aplicación hay dos transacciones con fragmentos:
 1. Añadir el fragmento inicial ListFragment en el  onCreate de MainActivity añade el fragmento inicial:
-    ```     
+    ```kotlin     
         if (savedInstanceState == null) {
               val fragmentContainer = findViewById<FragmentContainerView>(R.id.fragment_container)
               val listFragment = ListFragment()
@@ -31,7 +31,8 @@ En esta aplicación hay dos transacciones con fragmentos:
     Nótese que todo el código está encerrado en un if que controla que la llamada al onCreate no se produzca por una reconfiguración.
 2. Reemplazar el fragmento actual (ListFragment) por otro (DetailFragment), en la función onSelected de MainActivity, que hace de Listener para cualquier pulsación sobre un signo realizada en ListFragment.
 En este caso, vemos además como se usa la función _newInstance()_, un [static factory method](https://www.androiddesignpatterns.com/2012/05/using-newinstance-to-instantiate.html) que nos genera Android para facilitar instanciar fragmentos.
-   ```
+En la Actividad que instancia el fragmento:
+   ```kotlin
    override fun onSelected(starSignId: Int) {
        val fragmentContainer = findViewById<FragmentContainerView>(R.id.fragment_container)
        //Instanciamos el detailFragment, pasándole el id al factory method
@@ -43,9 +44,20 @@ En este caso, vemos además como se usa la función _newInstance()_, un [static 
            .commit()
    }
    ```
+  Y en el fragmento, el static factory method usado desde la actividad:
+  ```kotlin
+  fun newInstance(starSignId: Int) =
+              DetailFragment().apply {
+                  arguments = Bundle().apply {
+                      //Guardamos el id del signo del zodiaco
+                      putInt(STAR_SIGN_ID, starSignId)
+                  }
+              }
+  ```
+   
    El dato pasado (el id del signo del zodiaco) se recoge en onViewCreated en el fragmento, del siguiente modo
 
-   ```
+   ```kotlin
        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
            val starSignId = arguments?.getInt(STAR_SIGN_ID, 0) ?: 0
            setStarSignData(starSignId)
